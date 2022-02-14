@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.logo {
+  height: 35px;
+}
+select {
+  appearance: none;
+  background-color: white;
+}
+
+/* .myslider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-color: #dddddd;
+  width: 100%;
+} */
+
+/* .myslider:hover {
+  opacity: 0.8;
+} */
+input[type="range"] {
+  height: 6px;
+  -webkit-appearance: none;
+  background-color: #dddddd;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+
+  color: #00a1e5;
+  background-color: #00a1e5;
+  border-style: solid;
+  border-color: #00a1e5;
+  border-width: 1px;
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #00a1e5;
+  border-style: solid;
+  border-color: #00a1e5;
+  border-width: 1px;
+}
+
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #00a1e5;
+  border-style: solid;
+  border-color: #00a1e5;
+  border-width: 1px;
+}
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
+  border-style: solid;
+  border-color: #00a1e5;
+  border-width: 1px;
+}
+body {
+  background-color: #e5e5e5;
+}
