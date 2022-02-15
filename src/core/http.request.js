@@ -7,6 +7,7 @@ const http = Axios.create({
   baseURL: `${url}`,
   headers: {
     "X-Requested-With": "XMLHttpRequest",
+    "Access-Control-Allow-Origin": "https://hiring.zumata.xyz",
   },
 });
 

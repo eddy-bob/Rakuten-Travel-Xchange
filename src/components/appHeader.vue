@@ -151,7 +151,14 @@ export default {
       <div class="w-1/2 px-2 bg-white">
         <input
           type="text"
-          class="w-full py-4 text-rakuttenGrey font-extrabold"
+          class="
+            w-full
+            py-4
+            text-rakuttenGrey
+            font-extrabold
+            outline-none
+            focus:outline-none
+          "
           placeholder="2 adults,0 children, 1 room"
         />
       </div>

@@ -1,10 +1,35 @@
 <script>
+import HiringService from "../utils/hiring.service.js";
 export default {
+  data() {
+    return { sgo: "" };
+  },
   methods: {
     // take the page back to the top of the dom
     toTop() {
       document.documentElement.scrollTop = 0;
     },
+    // show items on hover
+    showItems(id) {
+      var item = document.getElementById(id);
+
+      item.style.display = "block";
+    },
+    hideItems(id) {
+      var item = document.getElementById(id);
+
+      item.style.display = "none";
+    },
+  },
+  mounted() {
+    //   HiringService.Autosuggest()
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    //
   },
 };
 </script>
@@ -43,11 +68,11 @@ export default {
         <div class="relative">
           <div>
             <input
+              v-model="sgo"
               type="range"
               class="w-full outline-none focus:outline-none myslider rounded-sm"
               min="1"
               max="100"
-              value="10"
               id="sliderRange"
             />
             <!-- <p
@@ -99,6 +124,7 @@ export default {
           <p class="border px-2 h-0 mt-4"></p>
 
           <input
+            v-model="sgo"
             class="
               outline-none
               focus:outline-none
@@ -1042,56 +1068,156 @@ export default {
                     location. Awesome vibe. Beautiful beac...
                   </p>
 
-                  <div class="space-x-1">
-                    <button
-                      class="
-                        border
-                        px-1
-                        text-rakuteenBlue
-                        rounded-sm
-                        border-rakuteenBlue
-                        py-1
-                      "
-                    >
-                      Breakfast
-                    </button>
-                    <button
-                      class="
-                        border
-                        px-1
-                        text-rakuteenBlue
-                        rounded-sm
-                        border-rakuteenBlue
-                        py-1
-                      "
-                    >
-                      Free Cancellation
-                    </button>
-                    <button
-                      class="
-                        border
-                        px-1
-                        text-rakuteenBlue
-                        rounded-sm
-                        border-rakuteenBlue
-                        py-1
-                      "
-                    >
-                      Pay Later
-                    </button>
-                    <button
-                      class="
-                        border
-                        px-1
-                        text-rakuteenBlue
-                        rounded-sm
-                        border-rakuteenBlue
-                        py-1
-                      "
-                    >
-                      +1
-                    </button>
+                  <div class="space-x-1 flex relative">
+                    <div>
+                      <button
+                        class="
+                          border
+                          px-1
+                          text-rakuteenBlue
+                          rounded-sm
+                          border-rakuteenBlue
+                          py-1
+                        "
+                      >
+                        Breakfast
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        class="
+                          border
+                          px-1
+                          text-rakuteenBlue
+                          rounded-sm
+                          border-rakuteenBlue
+                          py-1
+                        "
+                      >
+                        Free Cancellation
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        class="
+                          border
+                          px-1
+                          text-rakuteenBlue
+                          rounded-sm
+                          border-rakuteenBlue
+                          py-1
+                        "
+                      >
+                        Pay Later
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        @mouseenter="showItems('itemsId')"
+                        @mouseleave="hideItems('itemsId')"
+                        class="
+                          border
+                          px-1
+                          text-rakuteenBlue
+                          rounded-sm
+                          border-rakuteenBlue
+                          py-1
+                        "
+                      >
+                        +1
+                      </button>
+                    </div>
+                    <!-- hover elements -->
+                    <div class="arrow-body absolute hidden" id="itemsId">
+                      <div
+                        class="
+                          bg-rakuttenGrey
+                          text-white
+                          rounded-md
+                          p-4
+                          relative
+                        "
+                      >
+                        <div class="arrow-up"></div>
+                        <div class="flex space-x-3">
+                          <div>
+                            <div class="flex">
+                              <svg
+                                width="12"
+                                height="10"
+                                viewBox="0 0 12 10"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                  fill="#019501"
+                                />
+                              </svg>
+                              <p>Breakfast</p>
+                            </div>
+                            <div class="flex">
+                              <svg
+                                width="12"
+                                height="10"
+                                viewBox="0 0 12 10"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                  fill="#019501"
+                                />
+                              </svg>
+                              <p>Free cancellation</p>
+                            </div>
+                          </div>
+                          <div>
+                            <div class="flex">
+                              <svg
+                                width="12"
+                                height="10"
+                                viewBox="0 0 12 10"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                  fill="#019501"
+                                />
+                              </svg>
+                              <p>Pay later</p>
+                            </div>
+                            <div class="flex">
+                              <svg
+                                width="12"
+                                height="10"
+                                viewBox="0 0 12 10"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                  fill="#019501"
+                                />
+                              </svg>
+                              <p>Pay at hotel</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of hover elements -->
                   </div>
+
                   <div class="flex space-x-2">
                     <svg
                       width="16"
@@ -1131,7 +1257,7 @@ export default {
                       <div class="justify-end flex">
                         <p>Nightly avg.</p>
                       </div>
-                      <div class=" flex justify-end">
+                      <div class="flex justify-end">
                         <p>
                           SGD 120
                           <span class="font-extrabold text-black text-lg">
@@ -1522,4 +1648,19 @@ export default {
     </div>
   </div>
 </template>
-<style></style>
+<style>
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  left: 45%;
+  top: -8%;
+  border-bottom: 5px solid #333333;
+  position: absolute;
+}
+.arrow-body {
+  top: 90%;
+  left: 30%;
+}
+</style>
