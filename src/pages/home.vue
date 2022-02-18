@@ -22,14 +22,13 @@ export default {
     },
   },
   mounted() {
-    //   HiringService.Autosuggest()
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    //
+    HiringService.Autosuggest()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

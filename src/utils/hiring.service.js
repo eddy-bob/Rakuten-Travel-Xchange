@@ -1,9 +1,10 @@
-import { http } from "../core/http.request";
+// import { http } from "../core/http.request";
+import Axios from "axios";
 
 class HiringService {
-  constructor(http) {
-    this.request = http;
-  }
+  // constructor(http) {
+  //   this.request = http;
+  // }
 
   /**
    * GET - Search
@@ -11,11 +12,9 @@ class HiringService {
    * @returns --array fo matching searches
    */
   async Search(cityCode) {
-    return await this.request
-      .get(`/job01/search/${cityCode}`)
-      .then((response) => {
-        return response.data;
-      });
+    return await Axios.get(`/job01/search/${cityCode}`).then((response) => {
+      return response.data;
+    });
   }
 
   /**
@@ -24,10 +23,10 @@ class HiringService {
    * @returns --array/list of suggestioned locations
    */
   async Autosuggest() {
-    return await this.request.get("/job01/autosuggest").then((response) => {
+    return await Axios.get("/job01/autosuggest").then((response) => {
       return response.data;
     });
   }
 }
 
-export default new HiringService(http);
+export default new HiringService();
