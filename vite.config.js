@@ -9,9 +9,9 @@ export default defineConfig({
         target: "https://hiring.zumata.xyz",
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => {
-          path.replace(/^\/job01/, "");
-        },
+        // rewrite: (path) => {
+        //   path.replace(/^\/job01/, "");
+        // },
       },
     },
   },

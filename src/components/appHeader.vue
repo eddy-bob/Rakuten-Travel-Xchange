@@ -11,11 +11,16 @@ export default {
 <template>
   <div>
     <!-- first layer nav start -->
-    <div class="flex justify-between py-3 px-28 text-xs bg-white">
+    <div class="flex justify-between py-3 lg:px-28 px-4 text-xs bg-white">
       <div>
         <img class="logo" src="/cloudtravel-logo.jpg" alt="header logo" />
       </div>
-      <div class="flex space-x-3">
+      <!-- hamburger menu for moble.hidden on large screen -->
+      <div class="block lg:hidden mt-2">
+        <i class="fa fa-bars fa-2xl" aria-hidden="true"></i>
+      </div>
+      <!--nav content hidden on small screen -->
+      <div class="lg:flex space-x-3 hidden">
         <div class="flex">
           <div>
             <select
@@ -71,7 +76,8 @@ export default {
         text-xs
         z-10
         bg-rakuteenSecondBlue
-        flex
+        lg:flex
+        hidden
         w-full
         justify-center
         py-2
