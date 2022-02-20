@@ -1,12 +1,8 @@
 <script>
-import appHeader from "./components/appHeader.vue";
-import appFooter from "./components/appFooter.vue";
-export default {
-  components: { appHeader, appFooter },
-};
+export default {};
 </script>
 <template>
-  <div >
+  <div>
     <appHeader />
 
     <router-view></router-view>

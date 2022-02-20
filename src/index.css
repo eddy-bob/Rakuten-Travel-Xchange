@@ -6,7 +6,8 @@
 }
 select {
   appearance: none;
-  background-color: white;
+  background-color: transparent;
+  width: 100%;
 }
 
 /* .myslider::-webkit-slider-thumb {
