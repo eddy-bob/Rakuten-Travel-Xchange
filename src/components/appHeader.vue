@@ -135,6 +135,7 @@ export default {
           @blur="close"
           type="text"
           placeholder="Singapore,Singapore"
+          :value="singleSuggestion"
           class="
             py-4
             w-full
