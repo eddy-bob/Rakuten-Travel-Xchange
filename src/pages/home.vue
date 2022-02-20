@@ -1,5 +1,5 @@
 <script>
-import HiringService from "../utils/hiring.service.js";
+
 import sortAndfilter from "../modal/sortAndfilter.vue";
 import mapView from "../modal/mapView.vue";
 import appHeader from "../components/appHeader.vue";
@@ -26,15 +26,7 @@ export default {
       item.style.display = "none";
     },
   },
-  mounted() {
-    HiringService.Autosuggest()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
+ 
 };
 </script>
 
