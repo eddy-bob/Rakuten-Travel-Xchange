@@ -29,7 +29,7 @@ export default {
     addSuggestion(value) {
       this.singleSuggestion = value;
       // set to store
-      this.$store.state.commit("setlocation", this.suggested[i]);
+      this.$store.commit("setlocation", this.suggested[i]);
     },
   },
   // submit search
