@@ -103,7 +103,7 @@ export default { emit: ["close_Map"] };
         />
       </div>
       <button
-        class="bg-rakuteenBlue text-white py-4 font-extrabold rounded-sm px-16"
+        class="bg-rakuteenBlue text-white py-4 font-extrabold rounded-sm w-1/2"
       >
         Search
       </button>

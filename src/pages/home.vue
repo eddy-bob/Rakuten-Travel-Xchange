@@ -967,9 +967,19 @@ export default {
             >
               <button class="text-white">Popularity</button>
             </div>
-            <div class="flex bg-white w-full py-3 justify-center">
+            <div
+              class="
+                flex
+                bg-white
+                w-full
+                py-3
+                justify-center
+                outline-none
+                focus:outline-none
+              "
+            >
               <select>
-                <option>option {lowest first}</option>
+                <option>option (lowest first)</option>
               </select>
               <span>
                 <svg
