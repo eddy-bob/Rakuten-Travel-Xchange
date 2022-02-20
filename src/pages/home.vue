@@ -1,13 +1,14 @@
 <script>
 import HiringService from "../utils/hiring.service.js";
 import sortAndfilter from "../modal/sortAndfilter.vue";
+import mapView from "../modal/mapView.vue";
 import appHeader from "../components/appHeader.vue";
 import appFooter from "../components/appFooter.vue";
 export default {
   data() {
-    return { sgo: "", showSort: false };
+    return { sgo: "", showSort: false, showMap: false };
   },
-  components: { sortAndfilter, appHeader, appFooter },
+  components: { sortAndfilter, appHeader, appFooter, mapView },
   methods: {
     // take the page back to the top of the dom
     toTop() {
@@ -40,11 +41,9 @@ export default {
 <template>
   <div class="relative">
     <!-- modal for sort and filter available in small screen -->
-    <sortAndfilter
-      v-if="showSort == true"
-     
-      @close_Sort="showSort = false"
-    />
+    <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false" />
+    <!-- mapview form avialble on mobile only -->
+    <mapView v-if="showMap == true" @close_Map="showMap = false" />
     <!-- nav bar -->
     <appHeader />
 
@@ -1068,7 +1067,14 @@ export default {
                   />
                 </svg>
 
-                <button class="text-center text-rakuteenSecondBlue">
+                <button
+                  @click="showMap = true"
+                  class="
+                    text-center text-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                  "
+                >
                   Map View
                 </button>
               </div>

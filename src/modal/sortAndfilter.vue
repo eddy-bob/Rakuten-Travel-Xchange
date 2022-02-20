@@ -1,8 +1,5 @@
 <script>
-export default {
-
-  emit: ["closeSort"],
-};
+export default {};
 </script>
 
 <template>
