@@ -11,10 +11,11 @@ const store = createStore({
       // results: [],
     };
   },
-
-  setlocation(state, value) {
-    state.location.label = value.ladel;
-    state.location.cityCode = value.cityCode;
+  mutations: {
+    setlocation(state, value) {
+      state.location.label = value.ladel;
+      state.location.cityCode = value.cityCode;
+    },
   },
 
   // setlocationResult(state, data) {
@@ -22,13 +23,13 @@ const store = createStore({
   // },
 
   // actions: {
-    // auth actions
-    // async SAVE_LOCATION({ commit }, data) {
-    //   commit("setlocation", data);
-    // },
-    // async SAVE_LOCATION_RESULT({ commit }, data) {
-    //   commit("setlocationResult", data);
-    // },
+  // auth actions
+  // async SAVE_LOCATION({ commit }, data) {
+  //   commit("setlocation", data);
+  // },
+  // async SAVE_LOCATION_RESULT({ commit }, data) {
+  //   commit("setlocationResult", data);
+  // },
   // },
 });
 export default store;
