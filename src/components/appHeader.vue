@@ -25,17 +25,14 @@ export default {
           console.log(err);
         });
     },
+    // close suggestion modal
     close() {
       setTimeout(() => {
         this.showSuggestion = false;
       }, 1000);
     },
     addSuggestion(value) {
-      console.log("Eddy");
-      console.log(this.singleSuggestion);
       this.singleSuggestion = value;
-      console.log(this.singleSuggestion);
-      // this.showSuggestion = false;
     },
   },
 };
