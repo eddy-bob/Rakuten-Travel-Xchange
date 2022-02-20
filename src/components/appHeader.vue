@@ -4,7 +4,7 @@ import scroller from "../helpers/scroller.js";
 import HiringService from "../utils/hiring.service.js";
 export default {
   data() {
-    return { suggested: [], showSuggestion: false };
+    return { suggested: [], showSuggestion: false, singleSuggestion: "" };
   },
   mounted() {
     // make nav stick when it isnt being scrolled
@@ -24,6 +24,18 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    close() {
+      setTimeout(() => {
+        this.showSuggestion = false;
+      }, 1000);
+    },
+    addSuggestion(value) {
+      console.log("Eddy");
+      console.log(this.singleSuggestion);
+      this.singleSuggestion = value;
+      console.log(this.singleSuggestion);
+      // this.showSuggestion = false;
     },
   },
 };
@@ -123,7 +135,7 @@ export default {
         </span>
         <input
           @focus="autoSuggest"
-          @blur="showSuggestion = false"
+          @blur="close"
           type="text"
           placeholder="Singapore,Singapore"
           class="
@@ -153,7 +165,8 @@ export default {
           "
         >
           <div
-            class="flex text-xs space-x-2"
+            @click="addSuggestion(suggestion.label)"
+            class="flex text-xs space-x-2 cursor-pointer"
             v-for="(suggestion, i) in suggested"
             :key="i"
           >
