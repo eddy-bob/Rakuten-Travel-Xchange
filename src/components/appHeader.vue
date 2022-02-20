@@ -50,6 +50,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.searchResult = res;
+          this.singleSuggestion = "";
           // // save to store
           // this.$store.commit("setlocationResult", res);
         })
