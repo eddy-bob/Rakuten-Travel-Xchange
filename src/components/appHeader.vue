@@ -4,17 +4,24 @@ import scroller from "../helpers/scroller.js";
 import HiringService from "../utils/hiring.service.js";
 export default {
   data() {
-    return { suggested: [], showSuggestion: false, singleSuggestion: "" };
+    return {
+      suggested: [],
+      showSuggestion: false,
+      singleSuggestion: "",
+      searchResult: [],
+    };
   },
   mounted() {
     // make nav stick when it isnt being scrolled
     scroller();
+    // HiringService.Search();
   },
   methods: {
     autoSuggest() {
       HiringService.Autosuggest()
         .then((res) => {
           this.showSuggestion = true;
+
           console.log(res);
           // empty  suggested array to avoid added clones
           this.suggested.length = 0;
@@ -31,8 +38,25 @@ export default {
         this.showSuggestion = false;
       }, 1000);
     },
-    addSuggestion(value) {
+    // get search input
+    addSuggestion(value, i) {
       this.singleSuggestion = value;
+      // set to store
+      this.$store.state.commit("setlocation", this.suggested[i]);
+    },
+    // submit search
+    search() {
+      HiringService.Search(this.$store.state.location.cityCode)
+        .then((res) => {
+          console.log(res);
+          this.searchResult = res;
+          // // save to store
+          // this.$store.commit("setlocationResult", res);
+        })
+
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
@@ -100,6 +124,7 @@ export default {
     <!-- first layer nav end -->
 
     <form
+      @submit.prevent="search"
       id="header"
       class="
         text-xs
@@ -163,7 +188,7 @@ export default {
           "
         >
           <div
-            @click="addSuggestion(suggestion.label)"
+            @click="addSuggestion(suggestion.label, i)"
             class="flex text-xs space-x-2 cursor-pointer"
             v-for="(suggestion, i) in suggested"
             :key="i"

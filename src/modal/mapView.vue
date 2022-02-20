@@ -28,7 +28,23 @@ export default {
     },
     addSuggestion(value) {
       this.singleSuggestion = value;
+      // set to store
+      this.$store.state.commit("setlocation", this.suggested[i]);
     },
+  },
+  // submit search
+  search() {
+    HiringService.Search(this.$store.state.location.cityCode)
+      .then((res) => {
+        console.log(res);
+        this.searchResult = res;
+        // // save to store
+        // this.$store.commit("setlocationResult", res);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
@@ -50,7 +66,10 @@ export default {
       <span @click="$emit('close_Map')">X</span>
       <p>Where?</p>
     </div>
-    <form class="text-xs w-full justify-center py-4 px-3 rounded-sm space-y-4">
+    <form
+      @submit.prevent="search"
+      class="text-xs w-full justify-center py-4 px-3 rounded-sm space-y-4"
+    >
       <div class="w-full rounded-sm px-2 flex space-x-1 border relative">
         <span class="mt-4">
           <svg
@@ -100,7 +119,7 @@ export default {
           "
         >
           <div
-            @click="addSuggestion(suggestion.label)"
+            @click="addSuggestion(suggestion.label, i)"
             class="flex text-xs space-x-2 cursor-pointer"
             v-for="(suggestion, i) in suggested"
             :key="i"
