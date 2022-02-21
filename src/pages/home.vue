@@ -15,7 +15,8 @@ export default {
         // // save to store
         this.$store.commit(
           "setlocationResult",
-          res.outlets.availability.results
+          res.outlets.availability.results,
+          res.outlets.availability.results.totalItems
         );
       })
 
@@ -965,7 +966,8 @@ export default {
           <!-- filter result.hidden on small screen screen -->
           <!--  -->
           <p class="font-extrabold lg:block hidden">
-            {{ $store.state.location.label || "Singapore" }}:
+            <!-- {{ $store.state.location.label || "Singapore" }}: -->
+            Singapore:
             {{ $store.state.results.length }}
             properties found
           </p>
@@ -1139,13 +1141,15 @@ export default {
           <!-- search result notification for small screen -->
           <p class="font-extrabold block lg:hidden px-3 pb-4">
             {{ $store.state.location.label || "Singapore" }}:
-            {{ $store.state.results.length }}properties found
+            {{ $store.state.totalItems }}properties found
           </p>
           <!-- search  results -->
           <div>
             <div class="space-y-2">
               <!--  -->
               <div
+                v-for="(result, i) in $store.state.results"
+                :key="i"
                 class="
                   flex
                   space-x-2
@@ -1172,59 +1176,16 @@ export default {
                   <div class="space-y-2">
                     <div class="sm:flex sm:space-x-1">
                       <p class="font-extrabold text-sm">
-                        The Fullerton Boy Hotel
+                        {{ result.property.name }}
                       </p>
-                      <div class="flex space-x-1 mt-0.5">
+                      <div
+                        class="flex space-x-1 mt-0.5"
+                        v-for="(rating, i) in result.property.starRating"
+                        :key="i"
+                      >
                         <svg
                           width="15"
-                          height="14"
-                          viewBox="0 0 15 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z"
-                            fill="#E9BF2D"
-                          />
-                        </svg>
-                        <svg
-                          width="15"
-                          height="14"
-                          viewBox="0 0 15 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z"
-                            fill="#E9BF2D"
-                          />
-                        </svg>
-                        <svg
-                          width="15"
-                          height="14"
-                          viewBox="0 0 15 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z"
-                            fill="#E9BF2D"
-                          />
-                        </svg>
-                        <svg
-                          width="15"
-                          height="14"
-                          viewBox="0 0 15 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z"
-                            fill="#E9BF2D"
-                          />
-                        </svg>
-                        <svg
-                          width="15"
+                          :id="i"
                           height="14"
                           viewBox="0 0 15 14"
                           fill="none"
@@ -1291,8 +1252,8 @@ export default {
                       </div>
                       <div>
                         <button
-                          @mouseenter="showItems('itemsId')"
-                          @mouseleave="hideItems('itemsId')"
+                          @mouseenter="showItems(`${i}`)"
+                          @mouseleave="hideItems(`${i}`)"
                           class="
                             border
                             px-1
@@ -1306,7 +1267,7 @@ export default {
                         </button>
                       </div>
                       <!-- hover elements -->
-                      <div class="arrow-body absolute hidden" id="itemsId">
+                      <div class="arrow-body absolute hidden" :id="i">
                         <div
                           class="
                             bg-rakuttenGrey
@@ -1454,7 +1415,7 @@ export default {
               </div>
               <!--  -->
 
-              <div
+              <!-- <div
                 class="
                   lg:flex
                   hidden
@@ -1641,10 +1602,10 @@ export default {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!--  -->
 
-              <div
+              <!-- <div
                 class="
                   lg:flex
                   hidden
@@ -1831,7 +1792,7 @@ export default {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!--  -->
             </div>

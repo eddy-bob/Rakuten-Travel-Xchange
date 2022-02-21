@@ -53,7 +53,8 @@ export default {
           // // save to store
           this.$store.commit(
             "setlocationResult",
-            res.outlets.availability.results
+            res.outlets.availability.results,
+            res.outlets.availability.results.totalItems
           );
         })
 
