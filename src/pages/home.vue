@@ -13,11 +13,10 @@ export default {
         // this.searchResult = res;
         // this.singleSuggestion = "";
         // // save to store
-        this.$store.commit(
-          "setlocationResult",
+        this.$store.commit("setlocationResult", [
           res.outlets.availability.results,
-          res.outlets.availability.pagination.totalItems
-        );
+          res.outlets.availability.pagination.totalItems,
+        ]);
       })
 
       .catch((err) => {
@@ -968,7 +967,7 @@ export default {
           <p class="font-extrabold lg:block hidden">
             <!-- {{ $store.state.location.label || "Singapore" }}: -->
             Singapore:
-            {{ $store.state.results.length }}
+            {{ $store.state.totalItems }}
             properties found
           </p>
           <!--  -->
@@ -1180,8 +1179,8 @@ export default {
                       </p>
                       <div
                         class="flex space-x-1 mt-0.5"
-                        v-for="(rating, i) in result.property.starRating"
-                        :key="i"
+                        v-for="(rating) in result.property.starRating"
+                        :key="rating"
                       >
                         <svg
                           width="15"
@@ -1252,8 +1251,8 @@ export default {
                       </div>
                       <div>
                         <button
-                          @mouseenter="showItems(`${i}`)"
-                          @mouseleave="hideItems(`${i}`)"
+                          @mouseenter="showItems(`${rating}`)"
+                          @mouseleave="hideItems(`${rating}`)"
                           class="
                             border
                             px-1
@@ -1267,7 +1266,7 @@ export default {
                         </button>
                       </div>
                       <!-- hover elements -->
-                      <div class="arrow-body absolute hidden" :id="i">
+                      <div class="arrow-body absolute hidden" :id="rating">
                         <div
                           class="
                             bg-rakuttenGrey

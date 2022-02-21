@@ -9,7 +9,7 @@ const store = createStore({
         cityCode: null,
       },
       results: [],
-      totalItems: 0,
+      totalItem: 0,
     };
   },
   mutations: {
@@ -17,9 +17,9 @@ const store = createStore({
       state.location.label = value.label;
       state.location.cityCode = value.cityCode;
     },
-    setlocationResult(state, data, totalItems) {
-      state.results = data;
-      state.totalItems = totalItems;
+    setlocationResult(state, data) {
+      state.results = data[0];
+      state.totalItems = data[1];
     },
   },
 

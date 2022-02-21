@@ -51,11 +51,10 @@ export default {
           this.searchResult = res;
           this.singleSuggestion = "";
           // // save to store
-          this.$store.commit(
-            "setlocationResult",
+          this.$store.commit("setlocationResult", [
             res.outlets.availability.results,
-            res.outlets.availability.pagination.totalItems
-          );
+            res.outlets.availability.pagination.totalItems,
+          ]);
         })
 
         .catch((err) => {
