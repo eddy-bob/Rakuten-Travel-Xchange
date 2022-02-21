@@ -1,10 +1,28 @@
 <script>
-
 import sortAndfilter from "../modal/sortAndfilter.vue";
+import HiringService from "../utils/hiring.service.js";
 import mapView from "../modal/mapView.vue";
 import appHeader from "../components/appHeader.vue";
 import appFooter from "../components/appFooter.vue";
 export default {
+  mounted() {
+    // fetch on mount
+    HiringService.Search("sgsg")
+      .then((res) => {
+        console.log(res);
+        // this.searchResult = res;
+        // this.singleSuggestion = "";
+        // // save to store
+        this.$store.commit(
+          "setlocationResult",
+          res.outlets.availability.results
+        );
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   data() {
     return { sgo: "", showSort: false, showMap: false };
   },
@@ -26,7 +44,6 @@ export default {
       item.style.display = "none";
     },
   },
- 
 };
 </script>
 
@@ -948,7 +965,9 @@ export default {
           <!-- filter result.hidden on small screen screen -->
           <!--  -->
           <p class="font-extrabold lg:block hidden">
-            Singapore 9999 properties found
+            {{ $store.state.location.label || "Singapore" }}:
+            {{ $store.state.results.length }}
+            properties found
           </p>
           <!--  -->
 
@@ -1119,7 +1138,8 @@ export default {
           <!-- end for drop down available only in small screen -->
           <!-- search result notification for small screen -->
           <p class="font-extrabold block lg:hidden px-3 pb-4">
-            Singapore: 9999 properties found
+            {{ $store.state.location.label || "Singapore" }}:
+            {{ $store.state.results.length }}properties found
           </p>
           <!-- search  results -->
           <div>

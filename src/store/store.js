@@ -8,19 +8,18 @@ const store = createStore({
         label: null,
         cityCode: null,
       },
-      // results: [],
+      results: [],
     };
   },
   mutations: {
     setlocation(state, value) {
-      state.location.label = value.ladel;
+      state.location.label = value.label;
       state.location.cityCode = value.cityCode;
     },
+    setlocationResult(state, data) {
+      state.results = data;
+    },
   },
-
-  // setlocationResult(state, data) {
-  //   state.results = data;
-  // },
 
   // actions: {
   // auth actions
