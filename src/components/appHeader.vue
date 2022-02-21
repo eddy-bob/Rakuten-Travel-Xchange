@@ -54,7 +54,7 @@ export default {
           this.$store.commit(
             "setlocationResult",
             res.outlets.availability.results,
-            res.outlets.availability.results.totalItems
+            res.outlets.availability.pagination.totalItems
           );
         })
 
