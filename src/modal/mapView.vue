@@ -1,7 +1,7 @@
 <script>
 import HiringService from "../utils/hiring.service.js";
 export default {
-  emit: ["close_Map"],
+  emit: ["close_Map,activate_placeholder"],
   data() {
     return { suggested: [], showSuggestion: false, singleSuggestion: "" };
   },
@@ -35,6 +35,8 @@ export default {
     search() {
       console.log("clicked");
       if (this.singleSuggestion !== "") {
+        // activate placeholder
+        this.$emit("activate_placeholder", true);
         HiringService.Search(this.$store.state.location.cityCode)
           .then((res) => {
             console.log(res);
@@ -62,6 +64,8 @@ export default {
             }
             // close modal
             this.$emit("close_Map");
+            // deactivate placeholder
+            this.$emit("activate_placeholder", false);
           })
 
           .catch((err) => {
@@ -77,6 +81,8 @@ export default {
             this.$store.commit("setlocationResult", [[], "0"]);
             // close modal
             this.$emit("close_Map");
+            // deactivate placeholder
+            this.$emit("activate_placeholder", false);
           });
       }
     },

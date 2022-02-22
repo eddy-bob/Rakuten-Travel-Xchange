@@ -15,6 +15,7 @@ export default {
     // make nav stick when it isnt being scrolled
     scroller();
   },
+  emit: ["activate_placeholder"],
   methods: {
     autoSuggest() {
       HiringService.Autosuggest()
@@ -45,48 +46,57 @@ export default {
     },
     // submit search
     search() {
-      HiringService.Search(this.$store.state.location.cityCode)
-        .then((res) => {
-          console.log(res);
-          this.searchResult = res;
-          this.singleSuggestion = "";
+      if (this.singleSuggestion !== "") {
+        this.$emit("activate_placeholder", true);
+        HiringService.Search(this.$store.state.location.cityCode)
+          .then((res) => {
+            console.log(res);
+            this.searchResult = res;
+            this.singleSuggestion = "";
 
-          if (res.outlets.availability.results.length > 0) {
-            // destructuring the response body
-            const {
-              outlets: {
-                availability: { results },
-              },
-            } = res;
-            const {
-              outlets: {
-                availability: {
-                  pagination: { totalItems },
+            // deactivate placeholder
+            this.$emit("activate_placeholder", false);
+            if (res.outlets.availability.results.length > 0) {
+              // destructuring the response body
+              const {
+                outlets: {
+                  availability: { results },
                 },
-              },
-            } = res;
-            // // save to store
-            this.$store.commit("setlocationResult", [results, totalItems]);
-          } else {
-            // reset store error
-            this.$store.commit("setContentError", null);
-            // empty out store
+              } = res;
+              const {
+                outlets: {
+                  availability: {
+                    pagination: { totalItems },
+                  },
+                },
+              } = res;
+              // // save to store
+              this.$store.commit("setlocationResult", [results, totalItems]);
+            } else {
+              // reset store error
+              this.$store.commit("setContentError", null);
+              // empty out store
+              this.$store.commit("setlocationResult", [[], "0"]);
+              // deactivate placeholder
+              this.$emit("activate_placeholder", false);
+            }
+          })
+
+          .catch((err) => {
+            if (err.response) {
+              this.$store.commit("setContentError", err.response.data.message);
+            } else {
+              this.$store.commit(
+                "setContentError",
+                "opps... something went wrong"
+              );
+            }
+
             this.$store.commit("setlocationResult", [[], "0"]);
-          }
-        })
-
-        .catch((err) => {
-          if (err.response) {
-            this.$store.commit("setContentError", err.response.data.message);
-          } else {
-            this.$store.commit(
-              "setContentError",
-              "opps... something went wrong"
-            );
-          }
-
-          this.$store.commit("setlocationResult", [[], "0"]);
-        });
+            // deactivate placeholder
+            this.$emit("activate_placeholder", false);
+          });
+      }
     },
   },
 };

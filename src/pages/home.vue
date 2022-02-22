@@ -89,6 +89,9 @@ export default {
 
       item.style.display = "none";
     },
+    setShowPlaceHolder(value) {
+      this.showPlaceHolder = value;
+    },
   },
 };
 </script>
@@ -98,9 +101,13 @@ export default {
     <!-- modal for sort and filter available in small screen -->
     <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false" />
     <!-- mapview form avialble on mobile only -->
-    <mapView v-if="showMap == true" @close_Map="showMap = false" />
+    <mapView
+      v-if="showMap == true"
+      @close_Map="showMap = false"
+      @activate_placeholder="setShowPlaceHolder"
+    />
     <!-- nav bar -->
-    <appHeader />
+    <appHeader @activate_placeholder="setShowPlaceHolder" />
 
     <div class="lg:space-x-2 flex min-h-screen lg:mt-4 lg:px-20">
       <!--  -->
