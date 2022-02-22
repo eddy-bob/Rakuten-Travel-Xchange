@@ -68,13 +68,24 @@ export default {
             // // save to store
             this.$store.commit("setlocationResult", [results, totalItems]);
           } else {
+            // reset store error
+            this.$store.commit("setContentError", null);
             // empty out store
             this.$store.commit("setlocationResult", [[], "0"]);
           }
         })
 
         .catch((err) => {
-          console.log(err);
+          if (err.response) {
+            this.$store.commit("setContentError", err.response.data.message);
+          } else {
+            this.$store.commit(
+              "setContentError",
+              "opps... something went wrong"
+            );
+          }
+
+          this.$store.commit("setlocationResult", [[], "0"]);
         });
     },
   },

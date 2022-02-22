@@ -5,6 +5,8 @@ import mapView from "../modal/mapView.vue";
 import appHeader from "../components/appHeader.vue";
 import appFooter from "../components/appFooter.vue";
 import loadingPlaceHolder from "../helpers/loadingPlaceHolder.vue";
+import emptyContent from "../helpers/emptyContent.vue";
+import errorpage from "../helpers/errorpage.vue";
 export default {
   components: {
     sortAndfilter,
@@ -12,7 +14,10 @@ export default {
     appFooter,
     mapView,
     loadingPlaceHolder,
+    emptyContent,
+    errorpage,
   },
+
   computed: {
     searchResult() {
       if (this.$store.state.location.label != null) {
@@ -64,6 +69,7 @@ export default {
       showMap: false,
       results: [],
       showPlaceHolder: false,
+      noContent: false,
     };
   },
 
@@ -1008,7 +1014,6 @@ export default {
           <!-- filter result.hidden on small screen screen -->
           <!--  -->
           <p class="font-extrabold lg:block hidden">
-            <!-- {{ $store.state.location.label || "Singapore" }}: -->
             {{ searchResult }}
             properties found
           </p>
@@ -1185,6 +1190,20 @@ export default {
           </p>
           <!-- search  results -->
           <div>
+            <!--error message when something goes wrong  -->
+            <emptyContent
+              v-if="
+                $store.state.results.length < 1 && $store.state.error == null
+              "
+            />
+            <errorpage
+              v-if="
+                $store.state.error != null && $store.state.results.length < 1
+              "
+              >{{ $store.state.error }}</errorpage
+            >
+            <!-- no content message -->
+
             <div class="space-y-2">
               <!--  -->
               <div

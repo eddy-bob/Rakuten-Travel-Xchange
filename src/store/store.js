@@ -10,6 +10,7 @@ const store = createStore({
       },
       results: [],
       totalItem: 0,
+      error: null,
     };
   },
   mutations: {
@@ -20,6 +21,9 @@ const store = createStore({
     setlocationResult(state, [...data]) {
       state.results = data[0];
       state.totalItems = data[1];
+    },
+    setContentError(state, message) {
+      state.error = message;
     },
   },
 
