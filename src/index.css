@@ -20,6 +20,7 @@ select {
 /* .myslider:hover {
   opacity: 0.8;
 } */
+
 input[type="range"] {
   height: 6px;
   -webkit-appearance: none;
@@ -59,4 +60,13 @@ input[type="range"]::-ms-fill-upper {
 }
 body {
   background-color: #e5e5e5;
+}
+.ellipse {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
 }

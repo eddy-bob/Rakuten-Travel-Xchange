@@ -50,11 +50,27 @@ export default {
           console.log(res);
           this.searchResult = res;
           this.singleSuggestion = "";
-          // // save to store
-          this.$store.commit("setlocationResult", [
-            res.outlets.availability.results,
-            res.outlets.availability.pagination.totalItems,
-          ]);
+
+          if (res.outlets.availability.results.length > 0) {
+            // destructuring the response body
+            const {
+              outlets: {
+                availability: { results },
+              },
+            } = res;
+            const {
+              outlets: {
+                availability: {
+                  pagination: { totalItems },
+                },
+              },
+            } = res;
+            // // save to store
+            this.$store.commit("setlocationResult", [results, totalItems]);
+          } else {
+            // empty out store
+            this.$store.commit("setlocationResult", [[], ""]);
+          }
         })
 
         .catch((err) => {

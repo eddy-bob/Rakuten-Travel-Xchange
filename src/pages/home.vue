@@ -4,29 +4,59 @@ import HiringService from "../utils/hiring.service.js";
 import mapView from "../modal/mapView.vue";
 import appHeader from "../components/appHeader.vue";
 import appFooter from "../components/appFooter.vue";
+import loadingPlaceHolder from "../helpers/loadingPlaceHolder.vue";
 export default {
+  components: {
+    sortAndfilter,
+    appHeader,
+    appFooter,
+    mapView,
+    loadingPlaceHolder,
+  },
+
   mounted() {
-    // fetch on mount
+    //  load place holder
+    this.showPlaceHolder = true;
+    // fetch on services
     HiringService.Search("sgsg")
       .then((res) => {
+        this.showPlaceHolder = false;
         console.log(res);
-        // this.searchResult = res;
-        // this.singleSuggestion = "";
-        // // save to store
-        this.$store.commit("setlocationResult", [
-          res.outlets.availability.results,
-          res.outlets.availability.pagination.totalItems,
-        ]);
-      })
 
+        // // save to store
+        // destructuring the response body
+        const {
+          outlets: {
+            availability: { results },
+          },
+        } = res;
+        const {
+          outlets: {
+            availability: {
+              pagination: { totalItems },
+            },
+          },
+        } = res;
+
+        this.$store.commit("setlocationResult", [results, totalItems]);
+
+        this.results = results;
+      })
       .catch((err) => {
+        this.showPlaceHolder = false;
         console.log(err);
       });
   },
   data() {
-    return { sgo: "", showSort: false, showMap: false };
+    return {
+      sgo: "",
+      showSort: false,
+      showMap: false,
+      results: [],
+      showPlaceHolder: false,
+    };
   },
-  components: { sortAndfilter, appHeader, appFooter, mapView },
+
   methods: {
     // take the page back to the top of the dom
     toTop() {
@@ -196,6 +226,7 @@ export default {
                       flipswitch
                     "
                   />
+                  <span class="checkbox"></span>
                 </div>
                 <div>
                   <label for="check1">Excelent</label>
@@ -961,7 +992,9 @@ export default {
       </div>
 
       <div class="w-full min-h-screen flex flex-col justify-between pb-4">
-        <div class="lg:space-y-2">
+        <!-- placeholder that appears when their isnt content yet -->
+        <loadingPlaceHolder v-if="showPlaceHolder == true" />
+        <div class="lg:space-y-2" v-else>
           <!-- filter result.hidden on small screen screen -->
           <!--  -->
           <p class="font-extrabold lg:block hidden">
@@ -1179,12 +1212,12 @@ export default {
                       </p>
                       <div
                         class="flex space-x-1 mt-0.5"
-                        v-for="(rating) in result.property.starRating"
+                        v-for="rating in result.property.starRating"
                         :key="rating"
                       >
                         <svg
                           width="15"
-                          :id="i"
+                          :id="rating"
                           height="14"
                           viewBox="0 0 15 14"
                           fill="none"
@@ -1198,12 +1231,10 @@ export default {
                       </div>
                     </div>
                     <p>
-                      80 Collyer quay, Marina Bay, Singapore, Singapore, 049326
-                      (view map)
+                      {{ result.property.location.address }}
                     </p>
-                    <p>
-                      “Excellent boutique hotel. Great rooms in excellent
-                      location. Awesome vibe. Beautiful beac...
+                    <p class="ellipse">
+                      {{ result.property.reviews?.summary.text }}
                     </p>
 
                     <div class="lg:space-x-1 lg:flex hidden lg:relative">
@@ -1251,8 +1282,8 @@ export default {
                       </div>
                       <div>
                         <button
-                          @mouseenter="showItems(`${rating}`)"
-                          @mouseleave="hideItems(`${rating}`)"
+                          @mouseenter="showItems(`${i}hover`)"
+                          @mouseleave="hideItems(`${i}hover`)"
                           class="
                             border
                             px-1
@@ -1266,7 +1297,7 @@ export default {
                         </button>
                       </div>
                       <!-- hover elements -->
-                      <div class="arrow-body absolute hidden" :id="rating">
+                      <div class="arrow-body absolute hidden" :id="i + 'hover'">
                         <div
                           class="
                             bg-rakuttenGrey
@@ -1380,7 +1411,13 @@ export default {
                       <img src="/TY-score-widget-transparent.png" alt="" />
                     </div>
                     <div class="justify-end space-y-1 flex flex-col w-auto">
-                      <div class="justify-end flex">
+                      <div
+                        class="justify-end flex"
+                        v-if="
+                          result.packages[0]?.displayRate.value >
+                          result.packages[0]?.adjustedDisplayRate.value
+                        "
+                      >
                         <button
                           class="
                             border
@@ -1392,7 +1429,15 @@ export default {
                           "
                           style="font-size: 10px"
                         >
-                          SAVE 16% TODAY!
+                          SAVE
+                          {{
+                            Math.round(
+                              ((result.packages[0]?.displayRate.value -
+                                result.packages[0]?.adjustedDisplayRate.value) /
+                                result.packages[0]?.displayRate.value) *
+                                100
+                            )
+                          }}% TODAY!
                         </button>
                       </div>
                       <div class="w-full">
@@ -1401,9 +1446,21 @@ export default {
                         </div>
                         <div class="flex justify-end">
                           <p>
-                            SGD 120
+                            <span
+                              class="line-through"
+                              v-if="
+                                result.packages[0]?.displayRate.value !==
+                                result.packages[0]?.adjustedDisplayRate.value
+                              "
+                            >
+                              SGD
+                              {{ result.packages[0]?.displayRate.value }}</span
+                            >
                             <span class="font-extrabold text-black text-lg">
-                              SGD 100</span
+                              SGD
+                              {{
+                                result.packages[0]?.adjustedDisplayRate.value
+                              }}</span
                             >
                           </p>
                         </div>

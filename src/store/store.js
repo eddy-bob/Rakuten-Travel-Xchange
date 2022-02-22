@@ -17,7 +17,7 @@ const store = createStore({
       state.location.label = value.label;
       state.location.cityCode = value.cityCode;
     },
-    setlocationResult(state, data) {
+    setlocationResult(state, [...data]) {
       state.results = data[0];
       state.totalItems = data[1];
     },
