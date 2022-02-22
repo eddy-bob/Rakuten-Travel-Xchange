@@ -26,26 +26,49 @@ export default {
         this.showSuggestion = false;
       }, 1000);
     },
-    addSuggestion(value) {
+    addSuggestion(value, i) {
       this.singleSuggestion = value;
       // set to store
       this.$store.commit("setlocation", this.suggested[i]);
     },
-  },
-  // submit search
-  search() {
-    HiringService.Search(this.$store.state.location.cityCode)
-      .then((res) => {
-        console.log(res);
-        this.searchResult = res;
-        this.singleSuggestion = "";
-        // // save to store
-        // this.$store.commit("setlocationResult", res);
-      })
+    // submit search
+    search() {
+      console.log("clicked");
+      if (this.singleSuggestion !== "") {
+        HiringService.Search(this.$store.state.location.cityCode)
+          .then((res) => {
+            console.log(res);
+            this.singleSuggestion = "";
+            if (res.outlets.availability.results.length > 0) {
+              // // save to store
+              // destructuring the response body
+              const {
+                outlets: {
+                  availability: { results },
+                },
+              } = res;
+              const {
+                outlets: {
+                  availability: {
+                    pagination: { totalItems },
+                  },
+                },
+              } = res;
 
-      .catch((err) => {
-        console.log(err);
-      });
+              this.$store.commit("setlocationResult", [results, totalItems]);
+            } else {
+              // empty out store
+              this.$store.commit("setlocationResult", [[], "0"]);
+            }
+            // close modal
+            this.$emit("close_Map");
+          })
+
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   },
 };
 </script>
@@ -201,6 +224,7 @@ export default {
       </div>
       <button
         class="bg-rakuteenBlue text-white py-4 font-extrabold rounded-sm w-1/2"
+        type="submit"
       >
         Search
       </button>

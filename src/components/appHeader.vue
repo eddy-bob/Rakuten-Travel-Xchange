@@ -69,7 +69,7 @@ export default {
             this.$store.commit("setlocationResult", [results, totalItems]);
           } else {
             // empty out store
-            this.$store.commit("setlocationResult", [[], ""]);
+            this.$store.commit("setlocationResult", [[], "0"]);
           }
         })
 
