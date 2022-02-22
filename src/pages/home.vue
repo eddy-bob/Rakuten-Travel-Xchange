@@ -1185,7 +1185,10 @@ export default {
           </div>
           <!-- end for drop down available only in small screen -->
           <!-- search result notification for small screen -->
-          <p class="font-extrabold block lg:hidden px-3 pb-4">
+          <p
+            class="font-extrabold block lg:hidden px-3 pb-4"
+            v-if="$store.state.results.length > 0"
+          >
             {{ searchResult }}properties found
           </p>
           <!-- search  results -->

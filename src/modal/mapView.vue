@@ -65,7 +65,18 @@ export default {
           })
 
           .catch((err) => {
-            console.log(err);
+            if (err.response) {
+              this.$store.commit("setContentError", err.response.data.message);
+            } else {
+              this.$store.commit(
+                "setContentError",
+                "opps... something went wrong"
+              );
+            }
+
+            this.$store.commit("setlocationResult", [[], "0"]);
+            // close modal
+            this.$emit("close_Map");
           });
       }
     },
