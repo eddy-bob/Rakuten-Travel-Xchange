@@ -13,7 +13,17 @@ export default {
     mapView,
     loadingPlaceHolder,
   },
-
+  computed: {
+    searchResult() {
+      if (this.$store.state.location.label != null) {
+        return `${this.$store.state.location.label.split(",")[0]}: ${
+          this.$store.state.totalItems
+        }`;
+      } else {
+        return `Singapore: ${this.$store.state.totalItems}`;
+      }
+    },
+  },
   mounted() {
     //  load place holder
     this.showPlaceHolder = true;
@@ -999,9 +1009,7 @@ export default {
           <!--  -->
           <p class="font-extrabold lg:block hidden">
             <!-- {{ $store.state.location.label || "Singapore" }}: -->
-            {{ "Singapore" }}:
-
-            {{ $store.state.totalItems }}
+            {{ searchResult }}
             properties found
           </p>
           <!--  -->
@@ -1173,7 +1181,7 @@ export default {
           <!-- end for drop down available only in small screen -->
           <!-- search result notification for small screen -->
           <p class="font-extrabold block lg:hidden px-3 pb-4">
-            {{ "Singapore" }} : {{ $store.state.totalItems }}properties found
+            {{ searchResult }}properties found
           </p>
           <!-- search  results -->
           <div>
