@@ -9,6 +9,7 @@ export default {
       showSuggestion: false,
       singleSuggestion: "",
       searchResult: [],
+      singleSuggesionIndex: "",
     };
   },
   mounted() {
@@ -27,6 +28,7 @@ export default {
           this.suggested.length = 0;
           // fill arraa with suggested data
           this.suggested = res;
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
@@ -41,14 +43,19 @@ export default {
     // get search input
     addSuggestion(value, i) {
       this.singleSuggestion = value;
-      // set to store
-      this.$store.commit("setlocation", this.suggested[i]);
+
+      this.singleSuggesionIndex = i;
     },
     // submit search
     search() {
       if (this.singleSuggestion !== "") {
+        // set to store
+        this.$store.commit(
+          "setlocation",
+          this.suggested[this.singleSuggesionIndex]
+        );
         this.$emit("activate_placeholder", true);
-        HiringService.Search(this.$store.state.location.cityCode)
+        HiringService.Search(this.suggested[this.singleSuggesionIndex].cityCode)
           .then((res) => {
             console.log(res);
             this.searchResult = res;

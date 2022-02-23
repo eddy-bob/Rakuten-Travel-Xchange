@@ -28,6 +28,14 @@ export default {
         return `Singapore: ${this.$store.state.totalItems}`;
       }
     },
+    // search result for small screen
+    searchResultSmall() {
+      if (this.$store.state.location.label != null) {
+        return `${this.$store.state.location.label.split(",")[0]}`;
+      } else {
+        return `Singapore`;
+      }
+    },
   },
   mounted() {
     //  load place holder
@@ -1087,7 +1095,7 @@ export default {
 
               <div class="space-y-1">
                 <p class="font-extrabold block lg:hidden">
-                  Singapore,Singapore
+                  {{ searchResultSmall }}
                 </p>
                 <div class="flex space-x-4 text-rakuttenGrey text-xs">
                   <p>Aug 18 - Aug 19</p>
