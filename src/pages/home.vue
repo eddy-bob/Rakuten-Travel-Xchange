@@ -100,6 +100,19 @@ export default {
     setShowPlaceHolder(value) {
       this.showPlaceHolder = value;
     },
+    addPhoto(photo) {
+      if (photo.xs?.url) {
+        return photo.xs?.url;
+      } else if (photo.s?.url) {
+        return photo.s?.url;
+      } else if (photo.m?.url) {
+        return photo.m?.url;
+      } else if (photo.l?.url) {
+        return photo.l?.url;
+      } else {
+        return photo.xl?.url;
+      }
+    },
   },
 };
 </script>
@@ -1240,16 +1253,18 @@ export default {
               >
                 <div class="grid grid-cols-1">
                   <div>
-                    <img src="/image1.png" class="lg:h-auto h-full" />
+                    <img
+                      :src="result.property.heroImage.url"
+                      class="heroImage"
+                    />
                   </div>
-                  <div class="lg:grid hidden grid-cols-4">
-                    <img src="/Rectangle63.png" />
-                    <img src="/Rectangle64(copy).png" />
-                    <img src="/Rectangle 65(1).png" />
-                    <img src="/Rectangle66.png" />
+                  <div class="grid grid-cols-5">
+                    <div v-for="(photo, i) in result.property.gallery" :key="i">
+                      <img :src="addPhoto(photo)" class="galleryImage" />
+                    </div>
                   </div>
                 </div>
-                <div class="sm:flex justify-between w-full">
+                <div class=" flex lg:flex-row flex-col justify-between w-full">
                   <div class="space-y-2">
                     <div class="flex space-x-1">
                       <p class="font-extrabold text-sm">
@@ -1530,7 +1545,9 @@ export default {
           "
         >
           <div class="flex w-full justify-between">
-            <div><p @click="toTop" class="cursor-pointer">Back to top</p></div>
+            <div>
+              <p @click="toTop" class="cursor-pointer">Back to top</p>
+            </div>
             <div>
               <p class="text-rakuttenGrey">Showing Results 1 – 20 of 9999</p>
             </div>
@@ -1592,7 +1609,7 @@ export default {
     <appFooter />
   </div>
 </template>
-<style>
+<style scoped>
 .arrow-up {
   width: 0;
   height: 0;
@@ -1607,4 +1624,7 @@ export default {
   top: 90%;
   left: 30%;
 }
+.heroImage{width: 200px; height: 150px}
+.galleryImage{width:48px;height:48px}
 </style>
+
