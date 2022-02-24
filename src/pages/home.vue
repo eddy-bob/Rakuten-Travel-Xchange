@@ -1091,7 +1091,15 @@ export default {
                     <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
                 ></span>
                 <div
-                  class="bg-white flex justify-center py-3 w-full absolute shadow-sm"
+                  class="
+                    bg-white
+                    flex
+                    justify-center
+                    py-3
+                    w-full
+                    absolute
+                    shadow-sm
+                  "
                   style="margin-top: 32px"
                   v-if="showOption == true"
                 >
@@ -1362,7 +1370,7 @@ export default {
                           Pay Later
                         </button>
                       </div>
-                      <div>
+                      <div class="relative">
                         <button
                           @mouseenter="showItems(`${i}hover`)"
                           @mouseleave="hideItems(`${i}hover`)"
@@ -1377,96 +1385,100 @@ export default {
                         >
                           +1
                         </button>
-                      </div>
-                      <!-- hover elements -->
-                      <div class="arrow-body absolute hidden" :id="i + 'hover'">
+                        <!-- hover elements -->
                         <div
-                          class="
-                            bg-rakuttenGrey
-                            text-white
-                            rounded-md
-                            p-4
-                            relative
-                          "
+                          class="arrow-body absolute hidden w-72"
+                          :id="i + 'hover'"
                         >
-                          <div class="arrow-up"></div>
-                          <div class="flex space-x-3">
-                            <div>
-                              <div class="flex">
-                                <svg
-                                  width="12"
-                                  height="10"
-                                  viewBox="0 0 12 10"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
-                                    fill="#019501"
-                                  />
-                                </svg>
-                                <p>Breakfast</p>
+                          <div
+                            class="
+                              bg-rakuttenGrey
+                              text-white
+                              rounded-md
+                              px-3
+                              py-3
+                              relative
+                            "
+                          >
+                            <div class="arrow-up"></div>
+                            <div class="flex justify-center w-full space-x-16">
+                              <div class="space-y-2">
+                                <div class="flex">
+                                  <svg
+                                    width="12"
+                                    height="10"
+                                    viewBox="0 0 12 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                      fill="#019501"
+                                    />
+                                  </svg>
+                                  <p>Breakfast</p>
+                                </div>
+                                <div class="flex">
+                                  <svg
+                                    width="12"
+                                    height="10"
+                                    viewBox="0 0 12 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                      fill="#019501"
+                                    />
+                                  </svg>
+                                  <p>Free cancellation</p>
+                                </div>
                               </div>
-                              <div class="flex">
-                                <svg
-                                  width="12"
-                                  height="10"
-                                  viewBox="0 0 12 10"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
-                                    fill="#019501"
-                                  />
-                                </svg>
-                                <p>Free cancellation</p>
-                              </div>
-                            </div>
-                            <div>
-                              <div class="flex">
-                                <svg
-                                  width="12"
-                                  height="10"
-                                  viewBox="0 0 12 10"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
-                                    fill="#019501"
-                                  />
-                                </svg>
-                                <p>Pay later</p>
-                              </div>
-                              <div class="flex">
-                                <svg
-                                  width="12"
-                                  height="10"
-                                  viewBox="0 0 12 10"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
-                                    fill="#019501"
-                                  />
-                                </svg>
-                                <p>Pay at hotel</p>
+                              <div class="space-y-2">
+                                <div class="flex">
+                                  <svg
+                                    width="12"
+                                    height="10"
+                                    viewBox="0 0 12 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                      fill="#019501"
+                                    />
+                                  </svg>
+                                  <p>Pay later</p>
+                                </div>
+                                <div class="flex">
+                                  <svg
+                                    width="12"
+                                    height="10"
+                                    viewBox="0 0 12 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
+                                      fill="#019501"
+                                    />
+                                  </svg>
+                                  <p>Pay at hotel</p>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                        <!-- end of hover elements -->
                       </div>
-                      <!-- end of hover elements -->
                     </div>
 
                     <div class="lg:flex lg:space-x-2 hidden">
@@ -1643,8 +1655,9 @@ export default {
   position: absolute;
 }
 .arrow-body {
-  top: 90%;
-  left: 30%;
+  top: 130%;
+
+  margin-left: -500%;
 }
 .heroImage {
   width: 200px;
