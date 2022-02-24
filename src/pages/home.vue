@@ -78,6 +78,7 @@ export default {
       results: [],
       showPlaceHolder: false,
       noContent: false,
+      showOption: false,
     };
   },
 
@@ -1054,32 +1055,53 @@ export default {
             >
               <button class="text-white">Popularity</button>
             </div>
-            <div
-              class="
-                flex
-                bg-white
-                w-full
-                py-3
-                justify-center
-                outline-none
-                focus:outline-none
-              "
-            >
-              <select>
-                <option>option (lowest first)</option>
-              </select>
-              <span>
-                <svg
-                  width="8"
-                  height="5"
-                  viewBox="0 0 8 5"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="mt-1"
+            <div class="w-full flex flex-col">
+              <div
+                class="
+                  flex
+                  h-auto
+                  relative
+                  bg-white
+                  w-full
+                  py-3
+                  justify-center
+                  outline-none
+                  focus:outline-none
+                  space-x-1
+                "
+              >
+                <!-- <select>
+                <option selected >option (lowest first)</option>
+              </select> -->
+                <button
+                  @click="showOption = !showOption"
+                  class="outline-none focus:outline-none"
                 >
-                  <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
-              ></span>
+                  option (lowest first)
+                </button>
+                <span>
+                  <svg
+                    width="8"
+                    height="5"
+                    viewBox="0 0 8 5"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="mt-1"
+                  >
+                    <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
+                ></span>
+                <div
+                  class="bg-white flex justify-center py-3 w-full absolute shadow-sm"
+                  style="margin-top: 32px"
+                  v-if="showOption == true"
+                >
+                  <div class="space-y-2">
+                    <p>option (lowest first)</p>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div class="bg-white w-full text-center py-3">
               <button>Reviews</button>
             </div>
@@ -1264,7 +1286,7 @@ export default {
                     </div>
                   </div>
                 </div>
-                <div class=" flex lg:flex-row flex-col justify-between w-full">
+                <div class="flex lg:flex-row flex-col justify-between w-full">
                   <div class="space-y-2">
                     <div class="flex space-x-1">
                       <p class="font-extrabold text-sm">
@@ -1624,7 +1646,12 @@ export default {
   top: 90%;
   left: 30%;
 }
-.heroImage{width: 200px; height: 150px}
-.galleryImage{width:48px;height:48px}
+.heroImage {
+  width: 200px;
+  height: 150px;
+}
+.galleryImage {
+  width: 48px;
+  height: 48px;
+}
 </style>
-
