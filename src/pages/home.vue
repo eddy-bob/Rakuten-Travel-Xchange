@@ -1302,7 +1302,7 @@ export default {
                       </p>
                       <div
                         class="flex space-x-1 mt-0.5"
-                        v-for="rating in result.property.starRating"
+                        v-for="rating in Math.round(result.property.starRating)"
                         :key="rating"
                       >
                         <svg
@@ -1570,6 +1570,7 @@ export default {
         <!-- pagination -->
         <div
           class="
+            pt-6
             text-xs text-rakuteenSecondBlue
             lg:flex
             lg:space-y-0
