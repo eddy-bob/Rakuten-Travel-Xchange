@@ -176,9 +176,9 @@ export default {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative h-full">
     <!-- modal for sort and filter available in small screen -->
-    <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false" />
+    <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false"  />
     <!-- mapview form avialble on mobile only -->
     <mapView
       v-if="showMap == true"
