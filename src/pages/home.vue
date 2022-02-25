@@ -1027,7 +1027,7 @@ export default {
               class="flex space-x-1 text-rakuteenSecondBlue"
               @click="showFullProperty"
             >
-              <p class="cursor-pointer">Show 5 more</p>
+              <p class="cursor-pointer">{{propertyTypeLength}}</p>
               <span class="">
                 <svg
                   width="8"
