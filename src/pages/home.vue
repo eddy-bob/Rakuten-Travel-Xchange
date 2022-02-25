@@ -376,120 +376,87 @@ export default {
           </div>
           <div class="space-y-2">
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    checked
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                  <span class="checkbox"></span>
-                </div>
-                <div>
-                  <label for="check1">Excelent</label>
-                </div>
-              </div>
-              <p>999</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check2">Very Good</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                 checked
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                Excelent</label
+              >
 
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check3">Good</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                 
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                Very Good</label
+              >
+
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check4">Fair</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                 
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                Good</label
+              >
+
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check5">Poor</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                Fair</label
+              >
+
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check6">No Review</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                Fair</label
+              >
+
+              <p>999</p>
+            </div>
+            <div class="flex justify-between">
+              <label class="container">
+                <input
+                 
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+
+                No review</label
+              >
+
               <p>999</p>
             </div>
           </div>
@@ -516,7 +483,7 @@ export default {
               <div class="flex space-x-2">
                 <div>
                   <input
-                    checked
+                   
                     type="checkbox"
                     class="
                       bg-rakuteenSecondBlue
