@@ -66,7 +66,7 @@ export default {
 </script>
 
 <template>
-  <div class="absolute w-full lg:hidden top-0 h-full ">
+  <div class="absolute w-full lg:hidden top-0 h-full">
     <div class="relative">
       <div
         class="
@@ -155,33 +155,39 @@ export default {
           />
         </div> -->
 
-        <div class="flex justify-between space-x-1">
-          <input
-            class="
-              h-full
-              outline-none
-              focus:outline-none
-              py-2
-              border
-              font-extrabold
-              px-1
-            "
-            placeholder="SGO-0"
-          />
-
-          <p class="border px-2 h-0 mt-4"></p>
-
-          <input
-            class="
-              outline-none
-              focus:outline-none
-              py-2
-              border
-              font-extrabold
-              px-1
-            "
-            placeholder="SGD-550"
-          />
+        <div class="w-full flex justify-between">
+          <div class="w-1/2">
+            <input
+              class="
+                h-full
+                outline-none
+                w-full
+                focus:outline-none
+                py-2
+                border
+                font-extrabold
+                px-1
+              "
+              placeholder="SGO-0"
+            />
+          </div>
+          <div class="w-1/2">
+            <p class="border px-2 h-0 mt-4 flex justify-center w-3 mx-auto"></p>
+          </div>
+          <div class="w-1/2">
+            <input
+              class="
+                outline-none
+                focus:outline-none
+                py-2
+                w-full
+                border
+                font-extrabold
+                px-1
+              "
+              placeholder="SGD-550"
+            />
+          </div>
         </div>
       </section>
       <!--  -->
