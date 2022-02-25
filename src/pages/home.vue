@@ -67,7 +67,11 @@ export default {
       })
       .catch((err) => {
         this.showPlaceHolder = false;
-        console.log(err);
+        if (err.response) {
+          this.$store.commit("setContentError", err.response.data.message);
+        } else {
+          this.$store.commit("setContentError", "opps... something went wrong");
+        }
       });
 
     this.$nextTick(() => {
@@ -178,7 +182,7 @@ export default {
 <template>
   <div class="relative h-full">
     <!-- modal for sort and filter available in small screen -->
-    <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false"  />
+    <sortAndfilter v-if="showSort == true" @close_Sort="showSort = false" />
     <!-- mapview form avialble on mobile only -->
     <mapView
       v-if="showMap == true"
@@ -1298,7 +1302,7 @@ export default {
                                       fill-rule="evenodd"
                                       clip-rule="evenodd"
                                       d="M1.5 3.83398L0 5.33398L4.5 9.83398L12 2.33398L10.5 0.833984L4.5 6.83398L1.5 3.83398Z"
-                                      fill="#019501"
+                                      fill="#578057"
                                     />
                                   </svg>
                                   <p>Free cancellation</p>
@@ -1367,7 +1371,7 @@ export default {
                   <div
                     class="justify-between sm:flex flex-col lg:w-auto w-full"
                   >
-                    <div class="hidden lg:block">
+                    <div class="hidden lg:block ">
                       <img src="/TY-score-widget-transparent.png" alt="" />
                     </div>
                     <div class="justify-end space-y-1 flex flex-col w-auto">
