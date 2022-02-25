@@ -22,6 +22,9 @@ select {
 } */
 
 input[type="range"] {
+  -webkit-appearance: none;
+};
+input[type="range"] {
   height: 6px;
   -webkit-appearance: none;
   background-color: #dddddd;
