@@ -75,6 +75,7 @@ body {
   cursor: pointer;
   font-size: 12px;
   -webkit-user-select: none;
+
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -86,6 +87,7 @@ body {
   opacity: 0;
   cursor: pointer;
   height: 0;
+
   width: 0;
 }
 
@@ -96,7 +98,8 @@ body {
   left: 0;
   height: 15px;
   width: 15px;
-  background-color: #002d63;
+  background-color: #eee;
+  /* background-color: #002d63; */
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -104,6 +107,10 @@ body {
   content: "";
   position: absolute;
   display: none;
+}
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #002d63;
 }
 /* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
@@ -117,6 +124,7 @@ body {
   width: 5px;
   height: 10px;
   border: solid white;
+
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

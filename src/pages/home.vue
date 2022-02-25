@@ -69,33 +69,12 @@ export default {
         this.showPlaceHolder = false;
         console.log(err);
       });
+
     this.$nextTick(() => {
-      // set default meal toggle label after full mount
-      var arr = [];
-      var mealLength = this.mealPlan.length;
-      this.mealPlan = this.mealPlan.filter((value, i) => {
-        if (i < 2) {
-          arr.push(value);
-          this.mealPlanLength = `show ${mealLength - 2} more`;
-          return arr;
-        } else {
-          return "";
-        }
-      });
-      // set default property toggle label after full mount
-      var propertyArr = [];
-      var propertyLength = this.propertyType.length;
-      this.propertyType = this.propertyType.filter((value, i) => {
-        if (i < 3) {
-          console.log("e reach");
-          propertyArr.push(value);
-          this.propertyLength = `show ${propertyLength - 3} more`;
-          console.log(this.propertyLength);
-          return propertyArr;
-        } else {
-          return "";
-        }
-      });
+      this.oldMeal = this.mealPlan.slice(0, 2);
+      this.mealPlanLength = `show ${this.mealPlan.length - 2} more`;
+      this.oldProperty = this.propertyType.slice(0, 3);
+      this.propertyLength = `show ${this.propertyType.length - 3} more`;
     });
   },
   data() {
@@ -109,6 +88,8 @@ export default {
       showOption: false,
       mealPlanLength: 0,
       propertyLength: 0,
+      oldMeal: [],
+      oldProperty: [],
       mealPlan: [
         { name: "Room only", digit: "999" },
         { name: "Breakfast", digit: "999" },
@@ -118,31 +99,8 @@ export default {
         { name: "Full board", digit: "999" },
         { name: "All inclusive", digit: "999" },
       ],
-      mealPlan1: [
-        { name: "Room only", digit: "999" },
-        { name: "Breakfast", digit: "999" },
-        { name: "Lunch", digit: "999" },
-        { name: "Dinner", digit: "999" },
-        { name: "Half board", digit: "999" },
-        { name: "Full board", digit: "999" },
-        { name: "All inclusive", digit: "999" },
-      ],
+
       propertyType: [
-        { name: "Hotel", digit: "999" },
-        { name: "Hostel/Backpacker accomodation", digit: "999" },
-        { name: "Apartment", digit: "999" },
-        { name: "Aparthotel", digit: "999" },
-        { name: "Resort", digit: "999" },
-        { name: "Inn", digit: "999" },
-        { name: "Motel", digit: "999" },
-        { name: "Bed & breakfast", digit: "999" },
-        { name: "Guesthouse", digit: "999" },
-        { name: "Condo", digit: "999" },
-        { name: "Aparthotel", digit: "999" },
-        { name: "All-inclusive property", digit: "999" },
-        { name: "Hostal", digit: "999" },
-      ],
-      propertyType1: [
         { name: "Hotel", digit: "999" },
         { name: "Hostel/Backpacker accomodation", digit: "999" },
         { name: "Apartment", digit: "999" },
@@ -194,40 +152,22 @@ export default {
     },
     // toggle show full meal options
     showFullMeal() {
-      if (this.mealPlan === this.mealPlan1) {
-        var arr = [];
-        this.mealPlan = this.mealPlan.filter((value, i) => {
-          if (i < 2) {
-            arr.push(value);
-            this.mealPlanLength = `show ${this.mealPlan1.length - 2} more`;
-
-            return arr;
-          } else {
-            return "";
-          }
-        });
+      if (this.oldMeal === this.mealPlan) {
+        this.oldMeal = this.mealPlan.slice(0, 2);
+        this.mealPlanLength = `show ${this.mealPlan.length - 2} more`;
       } else {
-        this.mealPlan = this.mealPlan1;
+        this.oldMeal = this.mealPlan;
         this.mealPlanLength = ` show less`;
       }
     },
 
     // toggle show full property options
     showFullProperty() {
-      if (this.propertyType === this.propertyType1) {
-        var arr = [];
-        this.propertyType = this.propertyType.filter((value, i) => {
-          if (i < 3) {
-            arr.push(value);
-            this.propertyLength = `show ${this.propertyType1.length - 3} more`;
-
-            return arr;
-          } else {
-            return "";
-          }
-        });
+      if (this.oldProperty === this.propertyType) {
+        this.oldProperty = this.propertyType.slice(0, 3);
+        this.propertyLength = `show ${this.propertyType.length - 3} more`;
       } else {
-        this.propertyType = this.propertyType1;
+        this.oldProperty = this.propertyType;
         this.propertyLength = ` show less`;
       }
     },
@@ -378,7 +318,7 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                 checked
+                  checked
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -392,7 +332,6 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                 
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -406,7 +345,6 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                 
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -420,7 +358,6 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                  
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -434,7 +371,6 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                  
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -448,7 +384,6 @@ export default {
             <div class="flex justify-between">
               <label class="container">
                 <input
-                 
                   type="checkbox"
                   class="bg-rakuteenSecondBlue outline-none focus:outline-none"
                 />
@@ -480,19 +415,17 @@ export default {
           </div>
           <div class="space-y-2">
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                   
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="
+                    bg-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                    flipswitch
+                  "
+                />
+                <span class="checkmark"></span>
                 <div class="flex space-x-1">
                   <svg
                     width="15"
@@ -558,22 +491,22 @@ export default {
                     />
                   </svg>
                 </div>
-              </div>
+              </label>
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="
+                    bg-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                    flipswitch
+                  "
+                />
+                <span class="checkmark"></span>
+
                 <div class="flex space-x-1">
                   <svg
                     width="15"
@@ -626,23 +559,22 @@ export default {
                     />
                   </svg>
                 </div>
-              </div>
+              </label>
 
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="
+                    bg-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                    flipswitch
+                  "
+                />
+                <span class="checkmark"></span>
                 <div class="flex space-x-1">
                   <svg
                     width="15"
@@ -682,23 +614,22 @@ export default {
                     />
                   </svg>
                 </div>
-              </div>
+              </label>
               <p>999</p>
             </div>
 
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="
+                    bg-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                    flipswitch
+                  "
+                />
+                <span class="checkmark"></span>
                 <div class="flex space-x-1">
                   <svg
                     width="15"
@@ -725,22 +656,21 @@ export default {
                     />
                   </svg>
                 </div>
-              </div>
+              </label>
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="
+                    bg-rakuteenSecondBlue
+                    outline-none
+                    focus:outline-none
+                    flipswitch
+                  "
+                />
+                <span class="checkmark"></span>
                 <div class="flex space-x-1">
                   <svg
                     width="15"
@@ -755,7 +685,7 @@ export default {
                     />
                   </svg>
                 </div>
-              </div>
+              </label>
               <p>999</p>
             </div>
           </div>
@@ -808,61 +738,36 @@ export default {
 
           <div class="space-y-2">
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">Free Cancellation</label>
-                </div>
-              </div>
-              <p>999</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check2">Book now, Pay later</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>
+                Free Cancellation</label
+              >
 
               <p>999</p>
             </div>
             <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check2">Pay at hotel</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>Book now, Pay later</label
+              >
+
+              <p>999</p>
+            </div>
+            <div class="flex justify-between">
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>Pay at hotel</label
+              >
 
               <p>999</p>
             </div>
@@ -885,25 +790,17 @@ export default {
           <div class="space-y-2">
             <div
               class="flex justify-between"
-              v-for="(meal, i) in mealPlan"
+              v-for="(meal, i) in oldMeal"
               :key="i"
             >
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">{{ meal.name }}</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>{{ meal.name }}</label
+              >
+
               <p>{{ meal.digit }}</p>
             </div>
 
@@ -913,7 +810,7 @@ export default {
               </p>
               <span>
                 <svg
-                  v-if="mealPlan.length < 3"
+                  v-if="oldMeal.length < 3"
                   width="8"
                   height="5"
                   viewBox="0 0 8 5"
@@ -956,25 +853,16 @@ export default {
           <div class="space-y-2">
             <div
               class="flex justify-between"
-              v-for="(property, i) in propertyType"
+              v-for="(property, i) in oldProperty"
               :key="i"
             >
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">{{ property.name }}</label>
-                </div>
-              </div>
+              <label class="container">
+                <input
+                  type="checkbox"
+                  class="bg-rakuteenSecondBlue outline-none focus:outline-none"
+                />
+                <span class="checkmark"></span>{{ property.name }}</label
+              >
               <p>{{ property.digit }}</p>
             </div>
 
@@ -985,7 +873,7 @@ export default {
               <p class="cursor-pointer">{{ propertyLength }}</p>
               <span class="">
                 <svg
-                  v-if="propertyType.length < 4"
+                  v-if="oldProperty.length < 4"
                   width="8"
                   height="5"
                   viewBox="0 0 8 5"
