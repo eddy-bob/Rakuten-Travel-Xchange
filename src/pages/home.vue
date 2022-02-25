@@ -19,6 +19,12 @@ export default {
   },
 
   computed: {
+    mealListDialogue() {
+      return `Show ${this.mealPlanLength - 2} more`;
+    },
+    propertyListDialogue() {
+      return `Show ${this.propertyTypeLength - 2} more`;
+    },
     searchResult() {
       if (this.$store.state.location.label != null) {
         return `${this.$store.state.location.label.split(",")[0]}: ${
@@ -69,6 +75,33 @@ export default {
         this.showPlaceHolder = false;
         console.log(err);
       });
+    this.$nextTick(() => {
+      // set default meal toggle label after full mount
+      var arr = [];
+      var mealLength = this.mealPlan.length;
+      this.mealPlan = this.mealPlan.filter((value, i) => {
+        if (i < 2) {
+          arr.push(value);
+          this.mealPlanLength = `show ${mealLength - 2} more`;
+          return arr;
+        } else {
+          return "";
+        }
+      });
+      // set default property toggle label after full mount
+      var propertyArr = [];
+      var propertyLength = this.propertyType.length;
+      this.propertyType = this.propertyType.filter((value, i) => {
+        if (i < 3) {
+          console.log("e reach");
+          propertyArr.push(value);
+          this.propertyPlanLength = `show ${propertyLength - 2} more`;
+          return propertyArr;
+        } else {
+          return "";
+        }
+      });
+    });
   },
   data() {
     return {
@@ -79,6 +112,56 @@ export default {
       showPlaceHolder: false,
       noContent: false,
       showOption: false,
+      mealPlanLength: 0,
+      propertyTypeLength: 0,
+      mealPlan: [
+        { name: "Room only", digit: "999" },
+        { name: "Breakfast", digit: "999" },
+        { name: "Lunch", digit: "999" },
+        { name: "Dinner", digit: "999" },
+        { name: "Half board", digit: "999" },
+        { name: "Full board", digit: "999" },
+        { name: "All inclusive", digit: "999" },
+      ],
+      mealPlan1: [
+        { name: "Room only", digit: "999" },
+        { name: "Breakfast", digit: "999" },
+        { name: "Lunch", digit: "999" },
+        { name: "Dinner", digit: "999" },
+        { name: "Half board", digit: "999" },
+        { name: "Full board", digit: "999" },
+        { name: "All inclusive", digit: "999" },
+      ],
+      propertyType: [
+        { name: "Hotel", digit: "999" },
+        { name: "Hostel/Backpacker accomodation", digit: "999" },
+        { name: "Apartment", digit: "999" },
+        { name: "Aparthotel", digit: "999" },
+        { name: "Resort", digit: "999" },
+        { name: "Inn", digit: "999" },
+        { name: "Motel", digit: "999" },
+        { name: "Bed & breakfast", digit: "999" },
+        { name: "Guesthouse", digit: "999" },
+        { name: "Condo", digit: "999" },
+        { name: "Aparthotel", digit: "999" },
+        { name: "All-inclusive property", digit: "999" },
+        { name: "Hostal", digit: "999" },
+      ],
+      propertyType1: [
+        { name: "Hotel", digit: "999" },
+        { name: "Hostel/Backpacker accomodation", digit: "999" },
+        { name: "Apartment", digit: "999" },
+        { name: "Aparthotel", digit: "999" },
+        { name: "Resort", digit: "999" },
+        { name: "Inn", digit: "999" },
+        { name: "Motel", digit: "999" },
+        { name: "Bed & breakfast", digit: "999" },
+        { name: "Guesthouse", digit: "999" },
+        { name: "Condo", digit: "999" },
+        { name: "Aparthotel", digit: "999" },
+        { name: "All-inclusive property", digit: "999" },
+        { name: "Hostal", digit: "999" },
+      ],
     };
   },
 
@@ -112,6 +195,47 @@ export default {
         return photo.l?.url;
       } else {
         return photo.xl?.url;
+      }
+    },
+    // toggle show full meal options
+    showFullMeal() {
+      if (this.mealPlan === this.mealPlan1) {
+        var arr = [];
+        this.mealPlan = this.mealPlan.filter((value, i) => {
+          if (i < 2) {
+            arr.push(value);
+            this.mealPlanLength = `show ${this.mealPlan1.length - 2} more`;
+
+            return arr;
+          } else {
+            return "";
+          }
+        });
+      } else {
+        this.mealPlan = this.mealPlan1;
+        this.mealPlanLength = ` show less`;
+      }
+    },
+
+    // toggle show full property options
+    showFullProperty() {
+      if (this.propertyType === this.propertyType1) {
+        var arr = [];
+        this.propertyType = this.propertyType.filter((value, i) => {
+          if (i < 3) {
+            arr.push(value);
+            this.propertyTypeLength = `show ${
+              this.propertyType1.length - 3
+            } more`;
+
+            return arr;
+          } else {
+            return "";
+          }
+        });
+      } else {
+        this.propertyType = this.propertyType1;
+        this.propertyTypeLength = ` show less`;
       }
     },
   },
@@ -799,7 +923,11 @@ export default {
           <p class="font-extrabold text-black">Meal Plan</p>
 
           <div class="space-y-2">
-            <div class="flex justify-between">
+            <div
+              class="flex justify-between"
+              v-for="(meal, i) in mealPlan"
+              :key="i"
+            >
               <div class="flex space-x-2">
                 <div>
                   <input
@@ -813,12 +941,12 @@ export default {
                   />
                 </div>
                 <div>
-                  <label for="check1">Room only</label>
+                  <label for="check1">{{ meal.name }}</label>
                 </div>
               </div>
-              <p>999</p>
+              <p>{{ meal.digit }}</p>
             </div>
-            <div class="flex justify-between">
+            <!-- <div class="flex justify-between">
               <div class="flex space-x-2">
                 <div>
                   <input
@@ -837,9 +965,11 @@ export default {
               </div>
 
               <p>999</p>
-            </div>
+            </div> -->
             <div class="flex space-x-1 text-rakuteenSecondBlue">
-              <p>Show 5 more</p>
+              <p class="cursor-pointer" @click="showFullMeal">
+                {{ mealPlanLength }}
+              </p>
               <span class="">
                 <svg
                   width="8"
@@ -869,7 +999,11 @@ export default {
           <p class="font-extrabold text-black">Property type</p>
 
           <div class="space-y-2">
-            <div class="flex justify-between">
+            <div
+              class="flex justify-between"
+              v-for="(property, i) in propertyType"
+              :key="i"
+            >
               <div class="flex space-x-2">
                 <div>
                   <input
@@ -883,142 +1017,17 @@ export default {
                   />
                 </div>
                 <div>
-                  <label for="check1">Hotel</label>
+                  <label for="check1">{{ property.name }}</label>
                 </div>
               </div>
-              <p>999</p>
+              <p>{{ property.digit }}</p>
             </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">Hotel/Backpacker accomodation</label>
-                </div>
-              </div>
-              <p>999</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check2">Apartment</label>
-                </div>
-              </div>
 
-              <p>999</p>
-            </div>
-            <div class="flex space-x-1 text-rakuteenSecondBlue">
-              <p>Show 9 more</p>
-              <span class="">
-                <svg
-                  width="8"
-                  height="5"
-                  viewBox="0 0 8 5"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style="margin-top: 5px"
-                >
-                  <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
-              ></span>
-            </div>
-          </div>
-        </section>
-        <!--  -->
-
-        <section
-          class="
-            text-xs text-rakuttenGrey
-            bg-white
-            space-y-4
-            py-3
-            px-2
-            rounded-lg
-            shadow-lg
-          "
-        >
-          <p class="font-extrabold text-black">Facilities</p>
-
-          <div class="space-y-2">
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">Swimming pool</label>
-                </div>
-              </div>
-              <p>999</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check1">Room only</label>
-                </div>
-              </div>
-              <p>999</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <div>
-                  <input
-                    type="checkbox"
-                    class="
-                      bg-rakuteenSecondBlue
-                      outline-none
-                      focus:outline-none
-                      flipswitch
-                    "
-                  />
-                </div>
-                <div>
-                  <label for="check2">Breakfast</label>
-                </div>
-              </div>
-
-              <p>999</p>
-            </div>
-            <div class="flex space-x-1 text-rakuteenSecondBlue">
-              <p>Show 5 more</p>
+            <div
+              class="flex space-x-1 text-rakuteenSecondBlue"
+              @click="showFullProperty"
+            >
+              <p class="cursor-pointer">Show 5 more</p>
               <span class="">
                 <svg
                   width="8"
