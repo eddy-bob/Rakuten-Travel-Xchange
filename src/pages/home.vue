@@ -1170,7 +1170,6 @@ export default {
                       <p class="font-extrabold text-sm f">
                         {{ result.property.name }}
                       </p>
-                      
 
                       <div class="flex space-x-1 mt-0.5">
                         <svg
