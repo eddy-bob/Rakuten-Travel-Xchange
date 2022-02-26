@@ -1164,18 +1164,20 @@ export default {
                     </div>
                   </div>
                 </div>
-                <div class="flex lg:flex-row flex-col justify-between w-full">
+                <div class="flex flex-col justify-between w-full">
                   <div class="space-y-2">
-                    <div class="flex space-x-1">
-                      <p class="font-extrabold text-sm">
+                    <div class="lg:flex lg:space-x-1 relative">
+                      <p class="font-extrabold text-sm f">
                         {{ result.property.name }}
                       </p>
-                      <div
-                        class="flex space-x-1 mt-0.5"
-                        v-for="rating in Math.round(result.property.starRating)"
-                        :key="rating"
-                      >
+                      
+
+                      <div class="flex space-x-1 mt-0.5">
                         <svg
+                          v-for="rating in Math.round(
+                            result.property.starRating
+                          )"
+                          :key="rating"
                           width="15"
                           :id="rating"
                           height="14"
@@ -1188,6 +1190,9 @@ export default {
                             fill="#E9BF2D"
                           />
                         </svg>
+                      </div>
+                      <div class="hidden lg:flex absolute right-0">
+                        <img src="/TY-score-widget-transparent.png" alt="" />
                       </div>
                     </div>
                     <p>
@@ -1371,9 +1376,6 @@ export default {
                   <div
                     class="justify-between sm:flex flex-col lg:w-auto w-full"
                   >
-                    <div class="hidden lg:block ">
-                      <img src="/TY-score-widget-transparent.png" alt="" />
-                    </div>
                     <div class="justify-end space-y-1 flex flex-col w-auto">
                       <div
                         class="justify-end flex"

@@ -66,7 +66,7 @@ export default {
 </script>
 
 <template>
-  <div class="absolute w-full lg:hidden top-0 h-full">
+  <div class="absolute w-full lg:hidden top-0 h-full z-30">
     <div class="relative">
       <div
         class="
@@ -869,7 +869,7 @@ export default {
         py-2
         shadow-xl
         fixed
-        bottom-16
+        bottom-0
       "
     >
       <div
