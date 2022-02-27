@@ -40,9 +40,10 @@ export default {
   },
   mounted() {
     //  load place holder
-    // style progress for chrome
-    edgeProgressTracking(),
+ 
     this.showPlaceHolder = true;
+       // style progress for chrome
+    edgeProgressTracking(),
     // fetch on services
     HiringService.Search("sgsg")
       .then((res) => {

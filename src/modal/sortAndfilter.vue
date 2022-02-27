@@ -1,4 +1,5 @@
 <script>
+import edgeProgressTracking from "../helpers/edgeprogressTracking.js";
 export default {
   data() {
     return {
@@ -33,12 +34,14 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.oldMeal = this.mealPlan.slice(0, 2);
-      this.mealPlanLength = `show ${this.mealPlan.length - 2} more`;
-      this.oldProperty = this.propertyType.slice(0, 3);
-      this.propertyLength = `show ${this.propertyType.length - 3} more`;
-    });
+    // style progress for chrome
+    edgeProgressTracking(),
+      this.$nextTick(() => {
+        this.oldMeal = this.mealPlan.slice(0, 2);
+        this.mealPlanLength = `show ${this.mealPlan.length - 2} more`;
+        this.oldProperty = this.propertyType.slice(0, 3);
+        this.propertyLength = `show ${this.propertyType.length - 3} more`;
+      });
   },
   methods: {
     // toggle show full meal options
