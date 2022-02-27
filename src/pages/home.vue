@@ -236,6 +236,7 @@ export default {
                   outline-none
                   focus:outline-none
                   myslider
+                  styled-slider slider-progress
                   rounded-sm
                 "
                 min="1"
