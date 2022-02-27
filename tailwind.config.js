@@ -8,6 +8,7 @@ module.exports = {
         rakuttenGrey: "#333333",
         rakuttenLightGrey: "#f5f5f5",
       },
+      width: { almostfull: "71%" },
     },
   },
   plugins: [],

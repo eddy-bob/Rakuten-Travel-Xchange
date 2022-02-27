@@ -88,9 +88,8 @@ body {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-
+ 
   text-overflow: ellipsis;
-
   overflow: hidden;
 }
 .container {
@@ -155,3 +154,4 @@ body {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+

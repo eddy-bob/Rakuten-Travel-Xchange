@@ -1202,7 +1202,7 @@ export default {
                     <p>
                       {{ result.property.location.address }}
                     </p>
-                    <p class="ellipse">
+                    <p class="ellipse lg:w-almostfull ">
                       {{ result.property.reviews?.summary.text }}
                     </p>
 
