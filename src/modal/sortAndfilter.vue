@@ -150,7 +150,14 @@ export default {
           <div>
             <input
               type="range"
-              class="w-full outline-none focus:outline-none myslider"
+              class="
+                w-full
+                outline-none
+                focus:outline-none
+                myslider
+                styled-slider
+                slider-progress
+              "
               min="1"
               max="100"
               id="sliderRange"
