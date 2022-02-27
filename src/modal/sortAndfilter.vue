@@ -2,6 +2,7 @@
 export default {
   data() {
     return {
+      showOption: false,
       oldMeal: [],
       oldProperty: [],
       mealPlan: [
@@ -89,25 +90,55 @@ export default {
         <p class="font-extrabold text-xs text-rakuteenSecondBlue px-3">
           Sort by
         </p>
-        <div class="flex bg-white w-full py-3 text-xs text-rakuttenGrey">
-          <select>
-            <option>option (lowest first)</option>
-          </select>
-          <span>
-            <svg
-              width="8"
-              height="5"
-              viewBox="0 0 8 5"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="mt-1"
+
+        <div class="space-y-1 text-xs text-rakuttenGrey">
+          <div
+            class="
+              flex
+              h-auto
+              relative
+              bg-white
+              w-full
+              px-3
+              py-3
+              justify-between
+              outline-none
+              focus:outline-none
+            "
+          >
+            <!-- <select>
+                <option selected >option (lowest first)</option>
+              </select> -->
+            <button
+              @click="showOption = !showOption"
+              class="outline-none focus:outline-none"
             >
-              <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
-          ></span>
+              option (lowest first)
+            </button>
+            <span>
+              <svg
+                width="8"
+                height="5"
+                viewBox="0 0 8 5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="mt-1"
+              >
+                <path d="M0 0L4 5L8 0H0Z" fill="black" /></svg
+            ></span>
+          </div>
+          <div
+            class="bg-white flex justify-center py-3 w-full shadow-sm text-xs"
+            v-if="showOption == true"
+          >
+            <div class="space-y-2">
+              <p>option (lowest first)</p>
+            </div>
+          </div>
+          <p class="font-extrabold text-xs text-rakuteenSecondBlue px-3">
+            Filter by
+          </p>
         </div>
-        <p class="font-extrabold text-xs text-rakuteenSecondBlue px-3">
-          Filter by
-        </p>
       </div>
       <!--  -->
       <section class="text-xs shadow-md p-3 space-y-6 bg-white">

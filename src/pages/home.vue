@@ -7,6 +7,7 @@ import appFooter from "../components/appFooter.vue";
 import loadingPlaceHolder from "../helpers/loadingPlaceHolder.vue";
 import emptyContent from "../helpers/emptyContent.vue";
 import errorpage from "../helpers/errorpage.vue";
+import edgeProgressTracking from "../helpers/edgeprogressTracking.js"
 export default {
   components: {
     sortAndfilter,
@@ -39,6 +40,8 @@ export default {
   },
   mounted() {
     //  load place holder
+    // style progress for chrome
+    edgeProgressTracking(),
     this.showPlaceHolder = true;
     // fetch on services
     HiringService.Search("sgsg")
@@ -968,6 +971,7 @@ export default {
                     py-3
                     w-full
                     absolute
+                    z-10
                     shadow-sm
                   "
                   style="margin-top: 32px"
@@ -1042,10 +1046,7 @@ export default {
                   />
                 </svg> -->
                 <div class="">
-                  <img
-                    src="/canvas.png"
-                    class="w-4 h-3 mt-1 "
-                  />
+                  <img src="/canvas.png" class="w-4 h-3 mt-1" />
                 </div>
                 <button
                   class="text-center text-rakuteenSecondBlue"
@@ -1202,7 +1203,7 @@ export default {
                     <p>
                       {{ result.property.location.address }}
                     </p>
-                    <p class="ellipse lg:w-almostfull ">
+                    <p class="ellipse lg:w-almostfull">
                       {{ result.property.reviews?.summary.text }}
                     </p>
 
